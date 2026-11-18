@@ -1,11 +1,10 @@
-# GreenMetric Predictor - Backend
+# Green Metric Analysis Predictive -Backend y Frontend
 
 API REST para el modelado predictivo de indicadores sostenibles UI GreenMetric
 en la mejora de espacios verdes universitarios.
-
 Sistema multi-campus con autenticación JWT y roles diferenciados.
 
-## 🚀 Tecnologías
+## ⚙️ Tecnologías
 
 - **FastAPI** - Framework web
 - **PostgreSQL + PostGIS** - Base de datos geoespacial
@@ -21,6 +20,8 @@ Sistema multi-campus con autenticación JWT y roles diferenciados.
 - Python 3.11+
 - Docker Desktop
 - Git
+- Node.js
+- IDE Visual Studio Code
 
 ## 🔧 Instalación
 
@@ -28,26 +29,26 @@ Sistema multi-campus con autenticación JWT y roles diferenciados.
 
 ```bash
 git clone <url-del-repo>
-cd backend
 ```
 
 ### 2. Crear y activar el entorno virtual
 
 ```bash
+cd backend
 python -m venv venv
 venv\Scripts\activate  # Windows
 source venv/bin/activate  # Linux/Mac
 ```
 
-### 3. Instalar dependencias
+### 2.1. Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configurar variables de entorno
+### 3. Configurar variables de entorno
 
-Crea un archivo `.env` en la raíz con:
+Crear un archivo `.env`, dentro de la carpeta backend con el siguiente codigo:
 
 ```
 DATABASE_URL=postgresql://greenmetric:greenmetric123@localhost:5432/greenmetric_db
@@ -56,19 +57,19 @@ APP_NAME=GreenMetric Predictor
 APP_VERSION=0.1.0
 ```
 
-### 5. Levantar la base de datos
+### 4. Levantar la base de datos
 
 ```bash
 docker-compose up -d
 ```
 
-### 6. Ejecutar migraciones
+### 5. Ejecutar migraciones
 
 ```bash
 alembic upgrade head
 ```
 
-### 7. Crear el Admin inicial
+### 6. Crear el Admin inicial
 
 ```bash
 python -m scripts.seed_admin
@@ -80,11 +81,18 @@ python -m scripts.seed_admin
 python -m uvicorn app.main:app --reload
 ```
 
+### 9. Iniciar el frontend
+
+```bash
+cd frontend
+npm run dev
+```
+
 La API estará disponible en:
 - **API**: http://localhost:8000
 - **Documentación Swagger**: http://localhost:8000/docs
 
-## 🔐 Credenciales por defecto
+## 🔒 Credenciales por defecto
 
 Después de ejecutar el seed:
 
@@ -103,7 +111,6 @@ Después de ejecutar el seed:
 | **admin** | Gestiona usuarios, ve todos los campus |
 | **gestor** | Administra sus campus y zonas verdes |
 | **consultor** | Solo lectura de sus campus |
-| **pendiente** | Registrado pero sin aprobar |
 
 ### Flujo de registro
 
@@ -155,8 +162,3 @@ python app/ml/scrapear_overall.py
 # 2. Entrenar el modelo
 python app/ml/train_ranking.py
 ```
-
-## 📚 Documentación adicional
-
-- [Documentación de la API](./docs/API.md)
-- [Contrato para el Frontend](./docs/CONTRATO_FRONTEND.md)
